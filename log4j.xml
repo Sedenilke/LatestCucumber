@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="https://jakarta.apache.org/log4j/" debug="false">
+
+    <!--fileAppender dosya ekleyici diye cevirdi translater. -->
+    <appender name="fileAppender" class="org.apache.log4j.FileAppender">
+
+        <param name="Threshold" value="INFO" />
+
+<!-- value means the name of the file. It means whenever we use this configuration,
+for appending the file for a result we will get a file with the name logfile.log-->
+        <param name="File" value="logfile.log"/>
+<!-- format will be patternLayout. Bunu bize hoca gonderdi direkt.
+Proje adinin uzerine sag tiklayip olusturduk bu dokumani -->
+        <!--patternLayout means your report will look like this. Your message will come like this.
+        Format, design basically.-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%c{1}] %m %n" />
+        </layout>
+    </appender>
+
+    <root>
+
+        <level value="INFO"/>
+
+        <appender-ref ref="fileAppender"/>
+
+    </root>
+
+</log4j:configuration>

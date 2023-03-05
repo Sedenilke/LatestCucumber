@@ -1,0 +1,78 @@
+Recap:
+BDD - It allows us to write scenarios in gherkin language
+feature file'in icine yazdigim seyler step declearation yani interfacedeki blank unimplement methodlar,
+daha sonra when I run the feature file, cucumber offers snippet of these statements which means, it creates
+default methods for us, then we copy and paste these methods into a java file end write neccessary
+codes inside these methods. the beauty of cucumber offers that when we have a problem I do not need to
+go over hundreds lines of code, because I split my code meaningful small chunks. - Each statement/line of scenario becomes a method-
+so I directly go to related part of these codes.
+
+In one feature file, there can be many scenarios and these many scenarios can have many lines,
+when I add new scenario inside the same feature file, to snippet the steps of this new scenario ccumber
+runs every scenario in an order to reach this brand new scenario to create its default methods.
+It is very unnecessary action. time consuming.
+Step declaration:
+Feature - where you write user story Login: I can write valid/invalid/ blank login etc under this feature.
+Scenario: Test case - every test case will be considered as scenario in BDD.
+Given - pre-request/pre-condition
+When-perform actions
+And-Supporting tag
+Then-Expected output
+
+Step definition steps:
+Cucumber provides you the snippet (a small piece or brief extract. a piece of code) of step definition.
+In step definition, we write the code to perform actions which has been written in the BDD statement
+
+So far to execute the feature files and their scenarios we go inside the related feature file and run
+the scenario from there. But it is not practical.To go back and forth inside many different feature
+files and run them and they are non-java files. It will be nice to have one place to that I can
+make my decision which feature file or which scenario I will run or not run. This problem is solved
+with runner class.
+
+To execute all the features files from one class, we need runner class.
+to do this we create a new java class names RunnerClass
+I did not do anything inside the class definition part we worked above it.
+First we write @RunWith tag.
+which is coming from junit. We mentioned cucumber cannot work without Junit.
+Then we put cucumber as a class inside this .--> @RunWith(Cucumber.class)
+When we add this part, we saw arrows next to public class RunnerClass {} which means we can run
+the feature files inside this class.
+
+Framework: practical definition:
+We need to explain framework to the people who are inside the industry
+Organize structure to allows us to write specific type of code at specific type of place
+
+
+
+
+Simdiye kadar java ve feature filelar bir aradaydi. ama ileride onlarca bu
+filelardan olacak onlari ayni klasor icinde tutmam hic dogru bir duzenleme olmaz.
+bunun icin sol taraftaki klasor yapisina baktik.
+src -->test -->java (bu klasor zaten vardi. biz tum dokumanlari bu klasorun altina yazmistik.)
+java olmayan dokumanlari ayirmak icin yani feature filelari ayirmak icin yani Test'in ustune sag tikladik ve
+directoryi sectik--> o zaten bana opsiyonu sundu "resources" adini verdigimiz bir directory olusturduk.
+burasi Java yapisina sahip olmadigi icin paket olusturamiyorum ama directory olusturuyorum.
+daha sonra bu directory in altina "feattures adini verdigim baska bir directory olusturdum ve icine "" cucumberTool" klasorunun icindeki
+dashBoard.feature ve Login.feature dokumanlarini kopyalayip yapistirdim.
+daha sonra step definition classlari bir arada tutacagim "steps" adli paketi Java klasorunun altina
+olusturdum. Burasi Java kismi oldugu icin Paket olusturabildim.
+
+Ogretmenin notu:
+To keep everything organised we need framework-
+Framework allows you to write simplified and organised code and
+it provides folder to structure which is easily understandable
+
+In framework we have 2 separate branches for
+JAVA:In java, we write all java classes
+Non-jAVA: In non-java, we write non java part such as features, files etc.
+
+steps package -- for all step definitions
+runners package -- for all runner classes
+config directory -- for all config directory
+
+So far we open the browser and launch the application using hardcoding. We send the url inside the code and
+create a chromediver object and navigate the related application.
+and we are doing it QA environment. Next day manager may come and ask to run all these test cases staging environment whose
+url will be different, or open the application using different browsers, firefox, EI, Safari, etc. to solve this problem
+we created config.properties file where we use key and value pairs of url and browser as well as wait credential, but this document
+is mainly for configuration which includes url and browser.

@@ -1,0 +1,57 @@
+
+Class01:
+We create a new project and language kismini java,
+build systemi maven sectik ve advance settings kisminda
+groupId --> org.example orgtan sonraki kisim company adi.
+artfactId ise proje ismi. Burada groupId org.amazon ve artifactId ise alexa olabilir.
+artifactid'yi girdigimizde projenin ismi zaten otomatik olarak guncelleniyor.
+
+When we complete everything we will run everyting from POM.xml --> this is the backbone of our project.
+
+differences between jars/plug-in/dependency
+Jars are for local they are in my local machine in my computer
+dependency --> it is in cloud.
+plug-ins are add-on to dependencies. They bring flexibility. I can make one point execution or override the classes by adding
+plug-ins.
+
+plug in basically additional flexibility for specific purpose
+overrite multiple class into one class
+or one click option to run all the codes.
+these properties are coming with plug in
+
+ne yaptik?
+pom.xml dokumanina tek tek dependencyleri ekledik. Ne bunlar?
+>org.seleniumhq.selenium
+io. -->cucumber-java
+io. -->cucumber-junit (cucumberin calismasi icin Junite ihtiyaci var)
+
+daha sonra tek tusta herseyi test etmek icin
+ve diger additional ozellikler icin plug inleri ekledik.
+Nasil?
+sag ust kosedeki search optiondan pluginleri arattim ve gelen pencereden marketplace'de
+olduguma emin olduktan sonra
+cucumber for Java'yi arattim ve oradan install ettim o sirada otamatik olarak acilan
+pencere Jerkin de eklemem gerektigini soyledi onu da ekledim. sonra da intellijiyi restart ettik.
+
+----------------------------------
+Seleniumda WebDriver ile chrome driver arasindaki baglantiyi kurarken asagidaki kodu kullaniyorum:
+System.setProperty("webdriver.chrome.driver", "Driver/chromedriver.exe")
+First: I do not want to take care of the chromedriver.exe part path.
+Second: daha once basima geldigi uzere, "chromedriver.exe" makinamdaki bir file oldugu icin, chrome bir guncelleme
+geldiginde update olmuyor ve hata veriyor. It is not compatible hatasi veriyor.
+Bunu aratip makinemde guncellemistim hatirlatsan ilke.
+For a long term project it means that I need to do it a lot of times.
+It does not make sense!
+Third: cross browser testi yaparken, for firefox, chrome, etc,  firefoxdriver.exe, chromedriver.exe dokumanlari makinede yer isgal edecek etc....
+but we always want our project is lightwait. Bu istenmeyen bir DURUM.
+Tum bu kotu durumlari ortadan kaldirmak icin super cozum tESTng'de tanistigimiz WebDriverManager kullanmaya gectik.
+
+
+-------------------
+under src paketinde 2 tane klasor vardi main ve test.
+main was for developers so we deleted that one!
+ because we will be using test one
+
+ ------------------
+ to write the test scenarios -BDD- in Manual testing we have Jira,
+ for automation testing - we use speacial type of file. We create new file with extantion ".feature"

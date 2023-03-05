@@ -1,0 +1,33 @@
+Class 4:
+Runner Class:
+cucumber options in runner class
+features - to run the feature file, we provide a path to its repository
+glue - the path of our step definitions package
+dryRun - if we set it to true, it stops actual execution and scans all the steps quickly
+and provide us missing step definition
+monochrome - to remove irrelavant information from the console
+plugin - pretty - to print the steps in the console
+hangi dokumandan geldigini, methodun adinin ne oldugunu vs. gosteriyor.
+tags - to group the scenario for specific type of execution.
+
+so far we find the WebElements inside the steps documents under the methods.
+For example for different login scenarios: Valid login, valid sse login, invalid login we all find username
+text fields, and password text field and we send the keys. For this specific example, we used the same locater
+3 different scenarios. The number can be even 100's in real life. Everything works till one developer decided
+to change the id of one of our WebElements and all of our scenarios start to fail.
+To solve correct this situation, we have to go every step document and update the id.
+To solve this problem from a better perspective we should use POM. Where we define the WebElements only one place
+but use them as many as we want in our step discriptions. So making the one change will be enough to
+rescue all of our scenarios.
+ POM - Page object model - it is a design pattern.
+ people mostly get confused between pom.xml and POM
+ pom.xlm is configuration file!
+ POM --> it is a design pattern
+
+ How it solves our problems?
+ it allows QA's to keep object repository
+ in simple language, QA's write all the locators of the page in respective class same as page factory.
+
+ LoginPage-
+ DashboardPage -
+

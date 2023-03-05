@@ -1,0 +1,101 @@
+
+Class 05-
+Recap - runner class -
+to run our test cases as for the requirement - if I can only regression test/
+only smoke tests we can by just changing the tag
+to generate missing steps
+to print the steps into the console
+to generate the report
+
+Page Object Model - to have organised code and easy to maintain structure -it is not a code
+it is a designed pattern according to it, we separate class (page) to the screens available
+in the application in the application and keep all the locators of this page in it
+
+We create a PageInitializer class and we create an object of loginPage then
+we extends this page to commonMethods.
+
+page factory is the concept of selenium which we use to implement page
+object model design pattern which is responsible to initialize all the objects
+of the class here when we say objects we mean locators what we also call object repository
+if someone ask this to you in the interview you have to write the same thing
+
+    //in TestNG to represent preconditions/postconditions there were a couple of tags:
+    @BeforeTest, @beforeClass, @beforegroup, @afterClass, @AfterTest
+
+    here we are using only 2 tags instead of many and we call them Hooks. Because everytime in every scenario
+    we start with open the browser
+    @Before - pre condition needs to be mentioned in this
+    @After - post condition needs to be mentioned in this
+
+    Rules: Hooks class must be created inside steps package. Because all of the steps are inside this package.
+    it knows that before every steps I need to execute @Before
+
+Background - it is applicable only for one feature file
+             it means for every feature file background will be different
+             steps which are common among all the scenarios of that featur file
+             will be taken into background but make sure the flow is not broken.
+             if the flow breaks, then we cannot take steps in background after that
+
+
+Hooks VS background
+------------------------
+Hooks are applicable for whole project (for all the feature files)
+Background is applicable for one feature file and varies from file to file
+First Hooks execute then background execute then scenario execute.
+
+Diyelim ki EmployeeSearch. feature documanini run etmek isiiyorum.
+icinde iki tane senaryo var. Id ile search etme, isim ile search etme.
+siralama soyle oluyor.
+Hook-precondition + background + idsearch senaryo + hook+postCondition sonra
+Hook-precondition + background + namesearch senaryo + hook-postCondition.
+
+Passing ONE data from feature file:
+-----------------------------------
+So far we pass the data hard coded, and also using config file.
+But cucumber also allows us to pass data using feature file.
+We directly write the firstName and lastName inside the feature file step with "":
+And user enter "Aliye" and "Deniz" ------------
+
+I see this line inside the step document like that:
+ @When("user enter {string} and {string}")
+otomatik  public void user_enter_and(String string, String string2) olusturdu.
+
+  Ama buradaki String string, String string2 does not meaningful for anybody. So We changed it
+  with meaningful names: String firstName and String lastName. These variable names can be anything
+  but meaningful for the related method.
+  Her ne kadar feature file'da direkt isim yazsam da step definition kisminda bu argumentleri
+  parameter olarak gectigim icin burada hard coded data YAPMAMIS oluyorum.
+  Parameterize etmis oluyorum. Yani data bilgisi hala gizli:
+
+     public void user_enter_and(String firstName, String lastName) {
+         sendText(addEmployee.firstNameField, firstName);
+         sendText(addEmployee.lastNameField, lastName)
+
+Passing MULTIPLE DATA from feature file: (data driven testing) -- When your one script, when
+your one test case executes against multiple sets of data
+------------------------------------------
+This time I use scenario outline: rather than scenario.
+When I write this it gives error: with red line under scenario outline text.
+This time I will pass multiple values, so I need key-value pairs.To do that I use <> to pass
+data. Then I click on Scenario Outline title and it suggests to add example part. When I do it,
+I see Example part as below:
+ Examples:
+            | firstName | lastName |
+            | ilke      | pekiner  |
+            | ilkay     | pekiner  |
+            | dilek     | pekiner  |
+
+ and I add my values under each part.
+ bu adimi tek employee ekledigim senaryodaki metinle ayni tutup dryRun yaparsam hicbir sonuc alamiyorum.
+ Bu adim zaten varmis gibi davraniyor. Feature dokumanindaki ilgili statementin ustune tiklayip baktigimda,
+ tek employee ekledigim senaryodaki step definitioni gosteriyor, direkt senaryoyu run edersem hic sorunsuz calisiyor.
+ Ama boyle bir durumda direkt methoda bakarak bunun scnearyodan mi yoksa senaryo outlinedan mi geldigini soyleyemiyorum.
+ public void user_enter_and(String firstName, String lastName) {
+          sendText(addEmployee.firstNameField, firstName);
+          sendText(addEmployee.lastNameField, lastName)
+
+ Ama bu adimi ozellestirmek istersem feature file'da ilgili satirin aciklamasini biraz degistermem yeterli.
+ Bir diger nokta senaryo bastan sona 3 kere isliyor, Yani browser aciliyor, add employee tiklaniyor,
+ ilgili employee ekleniyor, browser kapaniyor.
+ ikinci employee icin tekrar browser aciliyor, add employee tiklaniyor, ilgili employee ekleniyor
+ ve browser kapaniyor. 3. employee icin de ayni sey oluyor. cok fazla zaman kaybi....

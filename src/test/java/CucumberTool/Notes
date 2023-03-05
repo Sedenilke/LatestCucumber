@@ -1,0 +1,34 @@
+Login Feature dokumanina
+jerken dilinde test senaryomuzu yazdik.
+when...
+then....
+etc.
+ilk basta keywordlerden sonra gelen kisimlar hep pembe gosteriyordu.
+bu sayfayi sag tiklayip Go TO --> Decleration sectim.
+alt kisma bir suru kod acti bunlarin kodlarini yazman gerekiyor diye. Burada declearation yaptim.
+
+bunun uzere bir java class olusturduk, adi StepDefClass ve -methodlari definitionu yaptigim yer burasi -
+altta yazan kodlari buraya yapistirdik.
+daha sonra feature dokumanindaki pembelikler gitti.
+
+Login.feature kisminda herhangi bir adimin ustune sag tiklayip go to declare dedigimde otamatik olarak
+StepDefClass dokumanindaki ilgili yere goturuyor ve mouseun cursori orada gorunuyor.
+
+Baska bir nokta:
+senaryomdaki AND keywordu bir onceki When aksiyonuna bagli oldugu icin,
+StepDefClass kisminda Senaryoda AND olarak gordugum kismi da When'e cevrilmis olarak goruyorum.
+
+feature dokumaninda olusan ufacik bir bosluk bile hata veriyor.
+ANLAMAZSAM NEREDE HATA YAPTIGIMI:
+StepDefClass'a gidip ilgili methoddan bu basligi kopyalaip tekrar Login Featuredaki hata veren yere
+yapistiriyorum.
+
+let's think we missed a step and I put it between the previous steps.
+This new step does not affect the other steps.
+ama yeni ekledigim adimi da StepDefClass'ina eklemem gerekiyor.
+
+daha sonra StepDefClass'in icindeki tum methodlari yazdiktan sonra Login.feature dokumanina gelip buradan run ediyorum.
+
+Burada bir senaryom 4 adimim oldugu icin testi run ettikten sonra raporda bunu goruyorum:
+1 scenarios (1 passed)
+4 steps (4 passed)

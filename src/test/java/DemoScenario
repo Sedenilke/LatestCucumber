@@ -1,0 +1,24 @@
+User Story12345:
+Searching a user in HRMS Website
+When we need verification/ validation we need to use Then, there can be multiple Then in a one scenario.
+Search by ID:
+Given user navigates to HRMS application
+When user enters valid username and password
+And User clicks on login button
+Then user navigates to dashboard page
+When user clicks on PIM option
+And User clicks on employee information button
+When user enters employee ID
+And User clicks on search button
+Then user see employee information is displayed
+
+Search by Name:
+Given user navigates to HRMS application
+When user enters valid username and password
+And User clicks on login button
+Then user navigates to dashboard page
+When user clicks on PIM option
+And User clicks on employee information button
+When user enters valid employee Name
+And User clicks on search button
+Then user see employee information is displayed

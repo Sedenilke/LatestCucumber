@@ -1,0 +1,93 @@
+Class 08:
+Recap
+screenshot method - in cucumber it accept array of byte
+to get the unique screenshot name, we have implemented timestamp method
+we use Scenario class of cucumber to get the details of execution.
+
+to generate report - we use html plugin from runner class
+reports always generate in target folder
+we plug - surefire makes whole project as a one. After adding surefire plugin I can generate the report from here.
+maven surefire pluginini ekledikten sonra https://github.com/damianszczepanik/maven-cucumber-reporting
+linkinden raporlama ile ilgili plugini ekledik.Onun ustunde biraz modifiye yaptik ve
+detaylar pom.xml'de. daha sonra sag ust yandaki maven'dan -->lifecyle --> test'e tikladik
+ve smoke runner teslerini calistirmis olduk. plugini aldigimiz kisimda -polonyali
+adamin repositorysinde- raporun target folderi altinda cucumber-html-reports adinda
+yeni bir klasorde olusturulacagini soyluyordu.
+oraya gittik.target -->cucumber-html-reports-->js-->overview-features.html  dokumanina sag tiklayip browser
+ile actik. Bunu tamamen sildim ve pom.xml'den tekrar testi
+run ettigimde bu klasor tekrar olustu. yani silebilmemde bir sikinti yok.
+
+Bir testi run ettigimde gecen senaryolar kadar gecmeyen senaryolar da olabilir. Bu durum belki server'san belki baska birseyden
+kaynaklanmistir. Bu senaryolara bir hak daha vermek icin bu senaryolarin pathlerini baska bir dokumanda topluyorum:
+bunun icin de orijinal runner class'taki plugin kismina "rerun:target/failed.txt" ekliyorum.
+Bu diyor ki, gecmeyen senaryolarin feature dokumanlarina ait pathleri, target folder altindaki failed.txt dokumaninin icine kopyala. Bunu manuel olarak
+da yapabilirim ama bu bilgi bana rapordan direkt geliyor o yuzden ne gerek var.
+daha sonra yeni bir runner class olusturuyorum. Adina da failed Runner diyorum. Ilk satirdaki
+features'in pathini artik failed.txt dokumanini gosterecek sekilde guncelliyorum.Faile eden senaryolarimi kimseyle
+paylasmak istemedigim icin buradaki testleri pom.xml'den run etmemin bir anlami yok. direkt buradan run ediyorum.
+bir de burada sadece glue="steps", monochrome =true ve plugin={pretty}'e ihtiyacim var, digerleri gereksiz.
+
+
+Log Files --- When we execute our code, we need to sharpen our debugging skills to have quick information about every step of execution,
+we need messages in the form of report.
+to get the details added by us, we need to create log files.
+To create this log file, we use log4j concept to do this
+we need to add another dependency Apache log4j. we searched for this dependency and added to pom.xml.
+Daha sonra direkt proje klasorunden sol ust kisimdaki-CucumberBatch14-e sag tikladik ve log4j.xml dokumanini olusturduk.
+Bunun icine pom.xml dokumanindaki kodlara benzer bir yapida kodlar yapistirdik. Bu kodu bir yerden aramadik.
+Direkt hoca kendi bilgisayarindan gonderdi.
+Bu ekleme appending the file yaptiginda sonuc olarak bize bir file ciktisi veriyormus adi logfile.log olan.
+Bunu utils klasorunun altina eklemem gerektigini soyledi.
+bundan sonra utils'in altina bir Log class olusturduk.
+Buraya common methodlar yazdik:
+startTestCase (String testCaseName)
+endTestCase(String testCaseName)
+info(String message)
+
+Daha sonra CommonMethods dokumanina gidip openBrowserAndLaunchApplication() methodunun en altina
+asagidaki kisimlari yapistirdik:
+DOMConfigurator.configure("log4j.xml");
+Log.startTestCase("My first test case is Login Test");
+Log.info("My login test is going on");
+Log.warning("My test case might be failed");
+
+ayni sekilde asagidaki kodlari da closeBrowser() methodunun altina yapistirdik:
+Log.info("My test case is about to complete");
+Log.endTestCase("This is my login test again");
+
+Ve testimizi pom.xml'den tekrar run ettik. Bu Sirada targetin altinda logfile.log dokumaninin
+olustugunu gorduk.
+
+maven is a build tool and mainly used by developer, as tester we use its limited
+functionality and here is its lifecycle:
+compile: source code converts into binary code
+package - code will be package into jar files.- for developer
+install - jars will be installed to local repo .m2
+deploy - here jars will go to remote repo(bu github degil, maven central repositerysi)
+test - code will be tested in this lifecycle
+clean - when you double click on it it says build success. -- we target folderi siliyor.
+
+
+when you run test actually asagidaki steplerin hepsi sirayla olusuyor:
+kod compile oluyor, lokal repomuza -.m2- install oluyor  daha sonra ilgili jar deploy oluyor
+ve test ediliyor.
+this will execute compile -install -deploy -test
+
+command prompttan baglanip yine test yapabiliriz.
+bunun icin proje klasorunun icine gittik ve yukaridaki breadcrumi silerek yerine "cmd"
+yazdik direkt bulundugumuz yere terminali acti.
+if we go to folder of our project in our computer,
+arama barina cmd yazarsak terminali aciyor.
+sonra da mvn clean yazarsak, yine buradan da maven projectteki target folderi siliyor.
+After that we see the "build success" message on the command.
+
+bundan sonra da mvn test commentini yaziyoruz.
+boylece uzaktan baglanip test yapabiliyor olacagiz.
+mvn clean --> tum target folderi siliyor.
+mvn test --> uzaktan baglanip testi run ediyor.
+
+
+maven cucumber reporting
+groupId --> name of the company
+artificalid --> project name
+

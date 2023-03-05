@@ -1,0 +1,51 @@
+Class06-
+Recap:
+Page object model with page initializer class
+In this initializer class, we initialize all the objects of
+page classes and call the method in common methods class in openbrowser method
+
+We created a collection point in steps classes
+--methods call from common method, locators call from respective page classes using object of that class
+
+Actually related step class is a collection point:
+we call it point of collection: common methods and related page objects
+are gathering into related steps class.
+
+Background: same steps in feature file among all the scenarios should be a part of
+it.
+
+Hooks: Pre and Post conditions for the entire project. Here we use 2 hooks:
+@Before and @After
+
+Parameterization testing:
+--we can add employee using feature file -'instead of passing hardcoded data, we pass values
+inside the scenario such as "abc", "xyz" etc.
+
+--to increase the scope of testing, we use data driven testing concept instead of scenario, we use scenario
+outline with example table.
+--in examples table we pass multiple data sets using keys and values
+
+Data Table:
+It allows us to pass multiple sets of data without executing background
+
+Example tables: Hooks and background execute everytime as per data set.
+In Data Table hooks and background execute only one time.
+
+We made 2 examples realted to data Tables:
+one is inside AddEmployee.feature:
+When user adds multiple employees and verify they are added successfully"
+ |firstName|middleName|lastName|
+      |zara    |MS        |camilullah|
+      |birgul  |MS        |ozgin     |
+      |alina   |MS        |bob       |
+which creates a list of maps and the other one is inside Dashboard.feature:
+ Then user verify all the dashboard tabs
+      |Admin|PIM|Leave|Time|Recruitment|Performance|Dashboard|Directory|
+
+      First example includes list of map and second example include only list.
+
+  Excel Reader:
+  Working with:
+  .xls --> HSSF
+  .xlsx --> XSSF
+

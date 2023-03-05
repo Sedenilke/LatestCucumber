@@ -1,0 +1,16 @@
+Class03:
+BDD-
+Behavioral driven development
+
+Why do we need framework?
+
+I am working in a team and leave in the middle of the project somebody came to my place this person can continue
+without a lot of guidance. Because frameWork has standard.
+Data Driven testing we need frameWork?
+Facebook example. login page is same for everybody in America, Asia etc.
+to be make sure login functionality we need excel files with 1000s of user for reach religion.
+and make sure login functionality working
+
+if we have small amount of user it is ok to test it conf or data provider like in TestNG.
+But for big amount of data I need to use something else like excel.
+how to access external resources? external resources are like excel.

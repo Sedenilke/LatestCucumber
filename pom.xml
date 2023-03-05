@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- yukaridaki xsi: adres maven central repositryin adresi -->
+    <!-- groupId will be the name of the company. Bunu projeyi create ederken biz verdik. her seferinde org.... olur
+    dedi, org'dan sonra company'in adini veriyorum. artifactId buna da name ile ayni adi verdik yani projenin adini.
+    Amazon company name, alexa, prime can be the project of this company dedi. -->
+    <groupId>org.syntax</groupId>
+    <artifactId>CucumberBatch14</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- buradaki numaralar javalarin versiyonlarini gosteriyor. Benimki 11 mesela.Buradan benim projemde
+        Java Oldugunu anliyorum. Bu numara based on JDK version.-->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <!-- We do not add jars here, jars giving the address of my local machine, but here
+   I am working with some other people. IN other words frameworkte bir suru farkli insanla calisiyorum,
+   ayni projenin farkli bolumlerinde calistigimizda jar sistemi ise yaramiyor. Biri login, digeri dashboard, bir digeri
+   logout kisminda calisiyor ve kodlarini gitHub'a yukluyorlar. Ben baskasinin yukledigi kodu alip bilgisayarima kopyaladigimda
+   jarlar icin lakal pathi arayacagindan ben bu kodlari kendi makinemde calistiramiyor olacagim.-->
+  <!-- bunun icin dependencies ekliyorum asagidaki kismi ben olusturdum. bu dependencileri bulmak icin
+   maven central repositorye gittim ve orada ornegin seleniumu arattim. ve en cok kullanimi olani sectim versiyonu 3.141.59 olani
+   daha sonra reload ettik. sag ust kisimda M iconunu gorup ustune tiklamam gerekiyordu reload etmem icin
+   ama ben bu iconu gormedim. ikinci yol olarak sag clik yapip Maven'i secip
+    artik uc kisi bir projeed calistiginda herkes mavenrepositorye baglandigi icin ben baskasinin kodunu
+    alip makinema kopyaladigimda benim makinemde de bu dependency'nin bir kopyasi olusuyor, nerede?  .m2 folderinde
+    bu nerede? This is why we work with framework. bu jarlar nerede toplaniyor?  makinemde users-ilkes-.m2-repository
+    klasorunde-->
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <!--daha sonra yine maven central repositoryden cucumberi ekledik - JAVA olani ama cucumber JUnit olmadan calismiyor. O yuzden bir de
+        cucumber-Junit ekledik bir sonraki adimda -->
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>6.9.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>6.9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!--daha sonra webdriver manager dependencysini ekledik. bunun detayli sebebi class01'in notlarinda-->
+        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+
+        <!--2. Derste config.properties dokumanini olusturduktan sonra asagidaki dependencyi ekledik ki bu dokumandaki
+        bilgileri okuyabilelim.Bunu excel dokumani icin kullanmiyoruz dedi.-->
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+        <!-- 2.Derste: Office Open XML dokumanlarini okuayabilmek icin ekledik. Yani excel dokumanlarini okumak icin. -->
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <!-- 2. Derste: Excel disindaki mesela properties typindaki dokumanlari okumak icin ekledik.
+        bunu apache commons diye arattik.Cunku baska common -io basliklari da vardi.-->
+               <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <!-- asagidaki kismi 8. derste log conceptini ogrendikten sonra ekledik. Bu concepti kullanmak icin log4j
+        dependencysine ihtiyacim varmis. Bunu onun icin ekledim-->
+
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+
+        <!-- mysqli kullanmak icin asagidaki dependencyi ekledik. bu remotedan geliyor ve jar seklinde projenin bulundugu
+  folderin icindeki .m2 folderinda depolaniyor ve boylelikle projede kullanabiliyoruz.-->
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.30</version>
+            </dependency>
+
+        <!--API class#5'in sonlarina dogru, restAssure ve json pluginlerini ekledik-->
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
+
+    </dependencies>
+
+    <!-- yukaridaki </dependencies> kismindan sonra </project> geliyordu ama 7. derste araya <build> </build> yazdiktan sonra bu iki kismin arasina
+    asagidaki kisimlari ekledik:
+     Ders 7'de, maven is build management tool dedi, stepler ayri bir component, util package is another component,
+    I don't want component, I wanted my whole project a single build. From one place I can run my project,
+    I can take care of all my dependencies, I can execute all my scenarios, I can generate all the reports, adding the screenshot
+    to my reports.that file in my project is pom.xml.To do this we searched for "Maven surefire plugin" on google, than we click on
+    "https://maven.apache.org/surefire/maven-surefire-plugin/" acilan sayfadan Using TestNG kismina tikladik. Buradan
+    Using Suite XML Files pluginini kopyaladik. -->
+
+    <build>
+        <!-- dependencylerin eklemesiyle selenium ve cucumberi kullanmaya basladim, ama hala tek bir noktadan execution ede
+        bilecegim bir yapi yok elimde, ya da classlarda overriding yapamayacagim bunlari da add-ons yani plugins ile yapabiliyoruz. Bu
+        frameworke flexibility sagliyor.pluginsleri eklemek icin sag ust kisimdaki searche tikladik,  daha sonra plugins yazdik
+        daha sonra marketplace opsiyonunu sectip, cucumber for java pluginini yukledik. o sirada birini daha eklemem gerektigini soyledi
+        onu da kabul ettim ve sonrasinda bilgisayari restart ettim ama bun dokumanlari burada goremiyorum neden bilmiyorum-->
+        <!--buraya kadar testleri runnerdan classtan execute ediyordum. maven surefire plugin ile bir noktada topluyorum. ve oradan run ediyorum.
+        bu plugin ona yariyor. ama henuz bir report mekanizmam yok.-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+
+                    <!--burada <suiteXmlFiles> < suiteXmlFile> testng.xml</suiteXmlFile></suiteXmlFiles> kisimlari vardi.
+                    bizim frameworkte xml filelarin olmadigini soyleyip, bu kismlari sildik. daha sonra onun yerine <includes> <include>
+                    basliklarini acip SmokeRunner.java yazdik. cunku bunun icinde yazan kismi execute/run etmek istiyorum.Bu buradan testi exevute etmeme
+                    yariyor."**" means till your test folder it gives you the path.inside this there is another folder I do not know which one it is.
+                    it will scan all the packages: "/*"
+                    but it had SmokeRunner.java in it.
+                    Tomorrow I am going to have another package called Regression, I will add this one like:
+                    <include>**/*RegressionRunner.java</include> For the future, we just need to copy and paste
+                    the whole code. We added that part how are we going to run it? First we click on Maven
+                    option right hand corner.->LifeCycle -> double click on test then it starts to execute the runner class.
+                     bu ekleme bize runner classa gitmeden pom.xmlden testi yapmamizi sagliyor.-->
+                    <includes>
+                        <include>**/*SmokeRunner.java</include>
+                        <!-- when I have more runner classes I can add them here -->
+                    </includes>
+                </configuration>
+            </plugin>
+<!-- I can add more plugins here later -->
+            <!--Ders 8, basi:  asagidaki kodu googleda maven cucumber reporting aramasini yaptiktan sonra karsimiza cikan
+            su adreste bulduk: https://github.com/damianszczepanik/maven-cucumber-reporting repositoriyden ekledik,maven cucmber reporting diye aratip.
+             yukaridaki ekleme bana bir noktadan execute etmemi sagliyordu. Ama rapor olusturmuyordu. bunun icin asagidaki
+             eklemeyi yaptik. kopyaladigimiz kisimda maven surefire kismi da gelmisti, bu kismi sildik bizde oldugu icin.
+             Geri kalanini kopyalayip
+             yapistirdik. Bu kodu aldigimiz yerde, testi yaptigimiz takdirde raporlarin target folderi altinda cucumber-html-reports folderini olusturuyor ilk kez
+             testi run ettikten sonra ve raporlar bunun icine kaydediliyor..
+             To see the report, bu folderin uzerine tiklayip icinde yer alan "js" folderindaki "overview-features.html bizim dokumanimiz bu.
+             bunu chrome ile acarsak, su renkli rapora ulasiyoruz.-->
+
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <!-- asagidaki kismin icinde <version>(check version above)</version> yaziyordu.Versiyonun ne oldugunu gormek icin
+                kodu kopyaladigimiz yere gittik. ve read me kismindan versiyonu yazdik, bu kisim basta kirmiziydi. Ben de repositorydeki
+                maven-central'in  versiyonuna baktik ve oradan yazik asagidaki
+               kismi-->
+                <version>5.7.4</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <!-- <phase>verify</phase> Phase is always be "test" verifyi test olarak degistirik. burada ne yapiyoruz. Verify mi? clean mi? buraya onu yaziyoruz -->
+                        <phase>test</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!-- project nami <projectName>cucumber-jvm-example</projectName> CucumberBatch14 olarak degistirdik-->
+                            <projectName>CucumberBatch14</projectName>
+                            <!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
+                            <!-- bu kismi sildik <skip>false</skip> -->
+                            <!-- output directory for the generated report. Bu benim target folderim aslinda -->
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <!-- optional, defaults to outputDirectory if not specified -->
+                            <!-- asagisaki  <inputDirectory>${project.build.directory}/jsonReports</inputDirectory> jsonReports kismini sildik
+                             cunku boyle bir folderimiz yok.Input directory ile output directory ayni yeri gosteriyor.-->
+                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <jsonFiles>
+                                <!-- supports wildcard or name pattern. 1-2 ders once runner classtaki plugin tagine json reportla
+                                ilgili birsey eklemistik. ayni zamanda target folderin altinda cucumber.json file'i vardi ama bunlari
+                                hic kullanmamistik cunku asagidaki kisma ihtiyacimiz varmis bunlari kullanabilmek icin.-->
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                            <!-- asagida baska kodlar da vardi, onlari da sildik, isimize yaramayacagi icin-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
